@@ -16,6 +16,11 @@ export class WorkController {
         return await this.workService.GetWorkList();
     }
 
+    @Get(':id')
+    async GetWork(@Param('id') id: number) {
+        return await this.workService.GetWorkDetail(id);
+    }
+
     @Put()
     async UpdateWork(@Body() work: WorkEntity) {
         return await this.workService.UpdateWork(work);

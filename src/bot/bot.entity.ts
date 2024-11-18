@@ -1,25 +1,19 @@
-import { Column, Entity, PrimaryGeneratedColumn, ManyToOne, JoinColumn } from "typeorm";
-import { UserEntity } from "src/user/user.entity";
+import { Column, Entity, PrimaryGeneratedColumn } from "typeorm";
 
 @Entity("bot")
 export class BotEntity {
     @PrimaryGeneratedColumn()
     id: number;
 
-    @Column()
-    content: string;
+    @Column({ default: "" })
+    api_key: string;
 
-    @Column()
-    result: string;
+    @Column({ default: "" })
+    bot_id: string;
 
-    @Column({ default: 1 })
-
-    user_id: number;
+    @Column({ default: "BOT CELL" })
+    intro: string;
 
     @Column({ type: "timestamp", default: () => "CURRENT_TIMESTAMP" })
-    created_at: Date;
-
-    @ManyToOne(() => UserEntity)
-    @JoinColumn({ name: "user_id" })
-    user: UserEntity;
+    update_time: Date;
 }

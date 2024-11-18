@@ -7,7 +7,8 @@ import { BotService } from 'src/bot/bot.service';
 @Injectable()
 export class BlogService {
     constructor(
-        @InjectRepository(BlogEntity) private blogRepository: Repository<BlogEntity>
+        @InjectRepository(BlogEntity) private blogRepository: Repository<BlogEntity>,
+        private readonly botService: BotService
     ) { }
 
     async CreateBlog(blog: BlogEntity) {
@@ -23,9 +24,8 @@ export class BlogService {
                 msg: '博客名已存在'
             }
         }
-        const botService = new BotService();
         console.log(blog.intro);
-        const res = await botService.ChatBot("这是我的文章简介，但是写的不够好，请你帮我进行优化，只返回优化后的内容：" + blog.intro);
+        const res = await this.botService.ChatBot("这是我的文章简介，但是写的不够好，请你帮我进行优化，只返回优化后的内容：" + blog.intro);
         blog.intro = res.data;
         return await this.blogRepository.save(blog);
     }
@@ -134,8 +134,7 @@ export class BlogService {
             }
         }
         if (blog.intro !== old.intro) {
-            const botService = new BotService();
-            const res = await botService.ChatBot("这是我的文章简介，但是写的不够好，请你帮我进行优化，只返回优化后的内容：" + blog.intro);
+            const res = await this.botService.ChatBot("这是我的文章简介，但是写的不够好，请你帮我进行优化，只返回优化后的内容：" + blog.intro);
             blog.intro = res.data;
         }
 

@@ -7,6 +7,7 @@ import { InfoEntity } from './info.entity';
 @Module({
   imports: [TypeOrmModule.forFeature([InfoEntity])],
   providers: [InfoService],
-  controllers: [InfoController]
+  controllers: [InfoController],
+  exports: [InfoService]
 })
 export class InfoModule { }

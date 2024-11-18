@@ -17,7 +17,7 @@ export class WorkEntity {
     @Column()
     link: string;
 
-    @Column({ default: "1.0.0" })
+    @Column({ default: "0.0.0" })
     vision: string;
 
     @Column({ type: "timestamp", default: () => "CURRENT_TIMESTAMP" })

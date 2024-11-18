@@ -7,6 +7,7 @@ import { WorkEntity } from './work.entity';
 @Module({
   imports: [TypeOrmModule.forFeature([WorkEntity])],
   providers: [WorkService],
-  controllers: [WorkController]
+  controllers: [WorkController],
+  exports: [WorkService]
 })
 export class WorkModule { }

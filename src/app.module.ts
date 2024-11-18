@@ -3,13 +3,13 @@ import { TypeOrmModule } from '@nestjs/typeorm';
 import { ConfigModule } from '@nestjs/config';
 import { AppController } from './app.controller';
 import { AppService } from './app.service';
+import { BotModule } from './bot/bot.module';
 import { UserModule } from './user/user.module';
 import { WorkModule } from './work/work.module';
 import { BlogModule } from './blog/blog.module';
 import { FileModule } from './file/file.module';
 import { InfoModule } from './info/info.module';
-import { BotService } from './bot/bot.service';
-import { BotModule } from './bot/bot.module';
+import { DashboardModule } from './dashboard/dashboard.module';
 
 @Module({
   imports: [
@@ -26,14 +26,15 @@ import { BotModule } from './bot/bot.module';
       entities: [__dirname + '/**/*.entity{.ts,.js}'],
       synchronize: true,
     }),
+    BotModule,
     UserModule,
     WorkModule,
     BlogModule,
     FileModule,
     InfoModule,
-    BotModule
+    DashboardModule
   ],
   controllers: [AppController],
-  providers: [AppService, BotService],
+  providers: [AppService],
 })
 export class AppModule { }

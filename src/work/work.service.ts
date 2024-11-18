@@ -44,6 +44,25 @@ export class WorkService {
         }
     }
 
+    async GetWorkDetail(id: number) {
+        const res = await this.workRepository.findOne({
+            where: {
+                id: id
+            }
+        })
+        if (!res) {
+            return {
+                code: 400,
+                message: '作品不存在'
+            }
+        }
+        return {
+            code: 200,
+            message: '作品详情获取成功',
+            data: res
+        }
+    }
+
     async UpdateWork(work: WorkEntity) {
         if (!work.id) {
             return {
@@ -63,14 +82,13 @@ export class WorkService {
                 message: '作品不存在'
             }
         }
+        work.update_time = new Date();
 
         await this.workRepository.update(work.id, work);
 
         const res = await this.workRepository.findOne({
             where: {
                 id: work.id
-
-
             }
         })
 
